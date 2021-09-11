@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div id="list-container">
     <div v-for="section of list" :key="section.ID">
       <collapse-transition>
         <v-card
-          class="my-4 ml-4"
+          class="my-4 cat-card-container"
           v-if="selected ? selected === section.category : true"
         >
           <h2 class="cat-header">{{ section.category }}</h2>
-          <v-list class=" cat-card">
+          <v-list class="cat-card">
             <v-list-item three-line v-for="item of section.list" :key="item.ID">
               <v-list-item-content>
                 <v-list-item-title class="d-flex align-center project-title">
@@ -47,6 +47,9 @@ export default {
 };
 </script>
 <style scoped>
+.cat-card-container {
+   margin-left: 28px;
+}
 .cat-card {
   background-color: rgb(236, 236, 236) !important;
 }
@@ -63,5 +66,24 @@ export default {
 .project-description, .project-link {
   font-weight: 600;
   font-size:16px;
+}
+@media only screen and (max-width: 777px) {
+  #list-container {
+      width: 85vw;
+      max-width:85vw !important;
+      min-width:85vw !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  .cat-card-container {
+    margin-left:0 !important;
+  }
+  .cat-card {
+    width: 85vw;
+      max-width:85vw !important;
+      min-width:85vw !important;
+  }
 }
 </style>

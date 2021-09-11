@@ -116,4 +116,13 @@ export default {
     color: #eff6e0;
   }
 }
+@media only screen and (max-width: 777px) {
+  #nav-drawer {
+      width: 90vw;
+      max-width:90vw !important;
+      min-width:90vw !important;
+      max-height:160px;
+      z-index: 1000;
+  }
+}
 </style>
