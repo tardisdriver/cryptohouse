@@ -1,9 +1,9 @@
 <template>
   <v-navigation-drawer
     id="nav-drawer"
-    floating
     permanent
     class="ml-5 mt-7 py-1 px-2"
+    :style="menuTop"
   >
     <v-list dense rounded>
       <v-list-item-title class="menu-title"
@@ -57,6 +57,8 @@ export default {
   data: () => ({
     items: [],
     showRevert: false,
+    scrollPosition: 0,
+    menuTop: '',
   }),
   created() {
     for (let item of listData) {
@@ -67,6 +69,18 @@ export default {
       });
     }
   },
+    mounted () {
+      window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy () {
+      window.removeEventListener('scroll', this.onScroll)
+  },
+  watch: {
+      scrollPosition (newPosition) {
+          if(newPosition >= 69) this.menuTop = 'top: 80px !important;'
+            else this.menuTop = ''
+      }
+  },
   methods: {
     handleSelected(item) {
       this.showRevert = true;
@@ -76,11 +90,16 @@ export default {
       this.showRevert = false;
       this.$emit("selected", "");
     },
+    onScroll () {
+        this.scrollPosition = window.top.scrollY
+        console.log(this.scrollPosition)
+    }
   },
 };
 </script>
 <style lang="scss" scoped>
 #nav-drawer {
+    position: sticky;
   background-color: #aec3b0;
   border-radius: 4px;
   min-width: 175px;
