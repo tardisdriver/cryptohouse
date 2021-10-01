@@ -20,23 +20,24 @@
     </v-app-bar>
 
     <v-main>
-      <div class="d-flex">
-        <Main />
-      </div>
+      <router-view></router-view>
+      <!-- <div class="d-flex"> -->
+       <!--  <Main />-->
+      <!-- </div>  -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Main from './components/Main';
+// import Main from './components/Main';
 // import LeftNav from './components/LeftNav.vue';
 
 export default {
   name: 'App',
 
-  components: {
-    Main,
-  },
+  // components: {
+  //   Main,
+  // },
 
   data: () => ({
     //
