@@ -140,6 +140,15 @@ export const ExternalLink = styled.a`
   }
 `;
 
+export const BodyTextContainer = styled.div`
+  padding: 20px 70px;
+  color: lightgrey;
+  font-size: 22px;
+  @media only screen and (min-width: 280px) and (max-width: 767px) {
+    padding: 15px;
+  }
+`;
+
 export const BodyText = styled.div`
   font-size: 18px;
   color: white;
@@ -270,10 +279,14 @@ function App() {
         <s.SpacerSmall />
         <s.Container
           fd={"row"}
-          jc={"space-between"}
-          style={{ width: "20%", margin: "0 auto" }}
+          jc={"center"}
+          style={{ width: "100%", margin: "0 auto" }}
         >
-          <a href="https://twitter.com/LexiSkulls" target="_blank">
+          <a
+            href="https://twitter.com/LexiSkulls"
+            target="_blank"
+            style={{ paddingRight: "40px" }}
+          >
             <img src="/config/images/logo-twitter.png" />
           </a>
           <a href="https://discord.gg/yb6ycJBw3y" target="_blank">
@@ -499,7 +512,6 @@ function App() {
               }}
             >
               <img width={progressWidth} src={"/config/images/slime.gif"} />
-              {/* <div style={{ backgroundImg: "/config/images/slime.gif", backgroundSize: "cover", backgroundRepeat: 'no-repeat' }} /> */}
             </div>
             <s.SpacerMedium />
             <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
@@ -529,9 +541,7 @@ function App() {
           <s.SpacerLarge />
         </ResponsiveWrapper>
         <s.SpacerXSmall />
-        <s.Container
-          style={{ padding: "20px 70px", color: "lightgrey", fontSize: "22px" }}
-        >
+        <BodyTextContainer>
           <s.TextTitle
             id="about"
             style={{ fontSize: "50px", color: "lightgrey" }}
@@ -600,7 +610,7 @@ function App() {
               Swearyskulls.
             </BodyText>
           </BodyText>
-        </s.Container>
+        </BodyTextContainer>
         <s.SpacerLarge />
         <s.Container
           style={{ padding: "20px 70px", color: "lightgrey", fontSize: "22px" }}
