@@ -60,7 +60,7 @@ export const ResponsiveWrapper = styled.div`
     flex-direction: row;
   }
   @media only screen and (min-width: 280px) and (max-width: 767px) {
-    margin-top: 90px;
+    margin-top: 100px;
     padding: 10px;
   }
 `;
@@ -223,7 +223,7 @@ function App() {
 
   const calculateProgress = () => {
     let progress = data.totalSupply / CONFIG.totalSupply;
-    let newProgressWidth = `${progress * 398}px`;
+    let newProgressWidth = `${progress * 298}px`;
     setProgressWidth(newProgressWidth);
   };
 
@@ -472,8 +472,8 @@ function App() {
             <s.SpacerXSmall />
             <div
               style={{
-                width: "400px",
-                height: "50px",
+                width: "300px",
+                height: "40px",
                 border: "1px solid white",
                 borderRadius: "3px",
                 overflow: "hidden",
