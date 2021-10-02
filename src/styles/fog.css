@@ -321,13 +321,28 @@
 }
 
 @media only screen and (min-width: 280px) and (max-width: 767px) {
-  #foglayer_01 .image01,
+  /* #foglayer_01 .image01,
   #foglayer_01 .image02,
   #foglayer_02 .image01,
   #foglayer_02 .image02,
   #foglayer_03 .image01,
   #foglayer_03 .image02 {
     width: 100%;
+  } */
+  #foglayer_01 .image01,
+  #foglayer_02 .image01,
+  #foglayer_03 .image01 {
+    width: 100%;
+  }
+  #foglayer_01 .image02,
+  #foglayer_02 .image02,
+  #foglayer_03 .image02 {
+    display: none;
+  }
+  .floating {
+    margin-left: 0 !important;
+    margin-top: 5px;
+    height: 60% !important;
   }
 }
 

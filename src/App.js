@@ -28,22 +28,19 @@ export const StyledButton = styled.button`
 
 export const StyledRoundButton = styled.button`
   padding: 10px;
-  border-radius: 100%;
+  border-radius: 40%;
   border: none;
-  background-color: var(--primary);
+  background-color: #3c006e;
   padding: 10px;
   font-weight: bold;
   font-size: 15px;
   color: var(--primary-text);
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
   :active {
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -61,10 +58,13 @@ export const ResponsiveWrapper = styled.div`
   @media (min-width: 767px) {
     flex-direction: row;
   }
+  @media only screen and (min-width: 280px) and (max-width: 767px) {
+    margin-top: 70px;
+  }
 `;
 
 export const StyledLogo = styled.img`
-  width: 200px;
+  width: 450px;
   @media (min-width: 767px) {
     width: 600px;
   }
@@ -104,6 +104,10 @@ export const NavMenu = styled.ul`
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
+  @media only screen and (min-width: 280px) and (max-width: 767px) {
+    flex-direction: column;
+    margin-top: 5px;
+  }
 `;
 
 export const NavMenuItem = styled.li`
@@ -115,12 +119,18 @@ export const NavMenuItem = styled.li`
     font-size: 24px;
     color: purple;
   }
+  @media only screen and (min-width: 280px) and (max-width: 767px) {
+    padding-bottom: 20px;
+  }
 `;
 
 export const ExternalLink = styled.a`
   text-decoration: none;
   transition: color 0.5s;
   :visited {
+    color: white;
+  }
+  :link {
     color: white;
   }
   :hover {
@@ -132,8 +142,11 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
+  const [navOpen, setNavOpen] = useState(false);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [feedback, setFeedback] = useState(
+    `Choose your amount and click buy to mint your NFT.`
+  );
   const [mintAmount, setMintAmount] = useState(1);
   const [progressWidth, setProgressWidth] = useState(`0px`);
   const [CONFIG, SET_CONFIG] = useState({
@@ -160,10 +173,7 @@ function App() {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    console.log("Cost: ", totalCostWei);
-    console.log("Gas limit: ", totalGasLimit);
-    console.log(blockchain.balance);
-    console.log(totalCostWei + totalGasLimit);
+    console.log(web3.eth.estimateGas);
     if (blockchain.balance < totalCostWei)
       setFeedback("Insufficient Balance in your wallet!");
     else
@@ -286,7 +296,7 @@ function App() {
               View On Opensea
             </ExternalLink>
           </NavMenuItem>
-          <li style={{ color: "#303030", fontSize: "22px" }}>
+          <li style={{ color: "#4c4c4c", fontSize: "22px" }}>
             Enter the gRAVEyard (coming soon!)
           </li>
         </NavMenu>
@@ -304,20 +314,6 @@ function App() {
               boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
-            <s.TextDescription
-              style={{
-                textAlign: "center",
-                color: "var(--primary-text)",
-              }}
-            >
-              <s.TextSubTitle>
-                {blockchain.account
-                  ? `Wallet Balance: ${
-                      Math.round(blockchain.humanReadableBal * 1000) / 1000
-                    } ${CONFIG.NETWORK.SYMBOL}`
-                  : ""}
-              </s.TextSubTitle>
-            </s.TextDescription>
             <s.SpacerSmall />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
@@ -342,7 +338,7 @@ function App() {
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
                   1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL} (excluding gas fees).
+                  {CONFIG.NETWORK.SYMBOL} (excluding gas fees, see * below).
                 </s.TextTitle>
                 <s.SpacerXSmall />
                 <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
@@ -404,13 +400,14 @@ function App() {
                           decrementMintAmount();
                         }}
                       >
-                        -
+                        <img src="/config/images/minus.png" />
                       </StyledRoundButton>
                       <s.SpacerMedium />
                       <s.TextDescription
                         style={{
                           textAlign: "center",
                           color: "var(--accent-text)",
+                          fontSize: "28px",
                         }}
                       >
                         {mintAmount}
@@ -423,10 +420,26 @@ function App() {
                           incrementMintAmount();
                         }}
                       >
-                        +
+                        <img src="/config/images/plus.png" />
                       </StyledRoundButton>
                     </s.Container>
                     <s.SpacerSmall />
+                    <s.TextDescription
+                      style={{
+                        textAlign: "center",
+                        color: "white",
+                      }}
+                    >
+                      <s.TextSubTitle>
+                        {blockchain.account
+                          ? `Wallet Balance: ${
+                              Math.round(blockchain.humanReadableBal * 1000) /
+                              1000
+                            } ${CONFIG.NETWORK.SYMBOL}`
+                          : ""}
+                      </s.TextSubTitle>
+                    </s.TextDescription>
+                    <s.SpacerXSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
                         disabled={claimingNft ? 1 : 0}
@@ -436,7 +449,7 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        {claimingNft ? "Minting..." : "BUY"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -486,9 +499,9 @@ function App() {
                   color: "grey",
                 }}
               >
-                We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract
-                to successfully mint your NFT. We recommend that you don't lower
-                the gas limit.
+                * We have set the gas limit to {CONFIG.GAS_LIMIT} for the
+                contract to successfully mint your NFT. We recommend that you
+                don't lower the gas limit.
               </s.TextDescription>
             </s.Container>
           </s.Container>
