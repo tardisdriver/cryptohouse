@@ -55,16 +55,18 @@ export const ResponsiveWrapper = styled.div`
   justify-content: stretched;
   align-items: stretched;
   width: 100%;
+  padding: 24px;
   @media (min-width: 767px) {
     flex-direction: row;
   }
   @media only screen and (min-width: 280px) and (max-width: 767px) {
-    margin-top: 70px;
+    margin-top: 90px;
+    padding: 10px;
   }
 `;
 
 export const StyledLogo = styled.img`
-  width: 450px;
+  width: 350px;
   @media (min-width: 767px) {
     width: 600px;
   }
@@ -300,7 +302,7 @@ function App() {
             Enter the gRAVEyard (coming soon!)
           </li>
         </NavMenu>
-        <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
+        <ResponsiveWrapper flex={1} test>
           <s.SpacerLarge />
           <s.Container
             flex={2}
