@@ -140,6 +140,12 @@ export const ExternalLink = styled.a`
   }
 `;
 
+export const BodyText = styled.div`
+  font-size: 18px;
+  color: white;
+  padding: 10px 0;
+`;
+
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -261,6 +267,19 @@ function App() {
         style={{ padding: 24, backgroundColor: "black" }}
       >
         <StyledLogo alt={"logo"} src={"/config/images/lexiskullslogo.png"} />
+        <s.SpacerSmall />
+        <s.Container
+          fd={"row"}
+          jc={"space-between"}
+          style={{ width: "20%", margin: "0 auto" }}
+        >
+          <a href="https://twitter.com/LexiSkulls" target="_blank">
+            <img src="/config/images/logo-twitter.png" />
+          </a>
+          <a href="https://discord.gg/yb6ycJBw3y" target="_blank">
+            <img src="/config/images/discord-icon.png" />
+          </a>
+        </s.Container>
         <s.SpacerSmall />
         <div id="fog-container">
           <div id="foglayer_01" class="fog">
@@ -513,17 +532,26 @@ function App() {
         <s.Container
           style={{ padding: "20px 70px", color: "lightgrey", fontSize: "22px" }}
         >
-          <s.TextTitle style={{ fontSize: "50px", color: "lightgrey" }}>
+          <s.TextTitle
+            id="about"
+            style={{ fontSize: "50px", color: "lightgrey" }}
+          >
             About Lexiskulls
           </s.TextTitle>
-          <p>lex·i·con - A wordbook or dictionary</p>
-          <p>skull - the inside-your-head meat helmet</p>
-          <p id="about">
-            Lexiskulls are a collection of 10,000 cute, deranged, misguided
-            skulls that love words even if the language parts of their brains
-            rotted a long time ago. Each skull is randomly generated from a bank
-            of:
-            <ul>
+          <BodyText>lex·i·con - A wordbook or dictionary</BodyText>
+          <BodyText>skull - the inside-your-head meat helmet</BodyText>
+          <BodyText>
+            <span style={{ fontStyle: "italic" }}>Lexiskulls</span> are a
+            collection of 10,000 cute, deranged, misguided skulls that love
+            words even if the language parts of their brains rotted a long time
+            ago. Each skull is randomly generated from a bank of:
+            <ul
+              style={{
+                margin: "15px 10px 5px 10px",
+                paddingInlineStart: "40px",
+                listStyle: "square",
+              }}
+            >
               <li>
                 12 backgrounds, including 2 rare, one super rare, and one ultra
                 rare
@@ -546,41 +574,44 @@ function App() {
                 words (nice), including 96 rare, 45 super rare and 1 ultra rare
               </li>
             </ul>
-          </p>
-          <p>
-            <h3>Everyone Dies Equally</h3>
-            <p>
+          </BodyText>
+          <BodyText>
+            <h3 style={{ marginBottom: "5px" }}>Everyone Dies Equally</h3>
+            <BodyText>
               Lexiskulls will be fairly priced all at 25 MATIC. No tiers, no
               curves, no weirdness. Just fair.
-            </p>
-            <p>
+            </BodyText>
+            <BodyText>
               100 Lexiskulls will be reserved for team, giveaways, and contests.
               The most rare of the rare, a 100% ultra-rare skull, will be given
-              as a prize in a treasure hunt launching October 31st. In order to
-              get access to the hunt, you'll need a skull in your wallet to gain
-              access to The gRAVEyard. What is The gRAVEyard you ask?
-            </p>
-          </p>
-          <p>
-            <h3>The gRAVEyard</h3>
-            <p>
+              as a prize in a competition launching soon. In order to get access
+              to the hunt, you'll need a skull in your wallet to gain access to
+              The gRAVEyard. What is The gRAVEyard you ask?
+            </BodyText>
+          </BodyText>
+          <BodyText>
+            <h3 style={{ marginBottom: "5px" }}>The gRAVEyard</h3>
+            <BodyText>
               The gRAVEyard is a members-only area accessible only by holding at
               least one Lexiskull in your wallet. The gRAVEyard is a place to
               let your skull relax and let whatever is left of their hair down.
               It also grants you safe passage to members-only benefits as they
               release, and early access to the next spin-off project,
               Swearyskulls.
-            </p>
-          </p>
+            </BodyText>
+          </BodyText>
         </s.Container>
         <s.SpacerLarge />
         <s.Container
           style={{ padding: "20px 70px", color: "lightgrey", fontSize: "22px" }}
         >
-          <s.TextTitle style={{ fontSize: "50px", color: "lightgrey" }}>
+          <s.TextTitle
+            id="about-ch"
+            style={{ fontSize: "50px", color: "lightgrey" }}
+          >
             About Cryptohouse
           </s.TextTitle>
-          <p id="about-ch">
+          <p>
             CryptoHouse is a bunch of punk ass bitches that have a Youtube show
             about bitching about the government and sometimes crypto.
           </p>
