@@ -69,15 +69,18 @@ export const connect = () => {
             method: "eth_getBalance",
             params: [accounts[0], "latest"],
           });
-          balance = (parseInt(balance, 16));
-          const humanReadableBal =web3.utils.fromWei(JSON.stringify(balance), 'ether')
+          balance = parseInt(balance, 16);
+          const humanReadableBal = web3.utils.fromWei(
+            JSON.stringify(balance),
+            "ether"
+          );
           dispatch(
             connectSuccess({
               account: accounts[0],
               smartContract: SmartContractObj,
               web3,
               balance,
-              humanReadableBal
+              humanReadableBal,
             })
           );
           // Add listeners start
@@ -101,7 +104,7 @@ export const connect = () => {
 };
 
 export const updateAccount = (account) => {
-  console.log(account)
+  console.log(account);
   return async (dispatch) => {
     dispatch(updateAccountRequest({ account: account }));
     dispatch(fetchData(account));

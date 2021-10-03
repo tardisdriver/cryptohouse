@@ -106,6 +106,7 @@ export const NavMenu = styled.ul`
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
+  list-style: none;
   @media only screen and (min-width: 280px) and (max-width: 767px) {
     flex-direction: column;
     margin-top: 5px;
@@ -116,9 +117,8 @@ export const NavMenuItem = styled.li`
   color: white;
   font-size: 22px;
   cursor: pointer;
-  transition: font-size 1s, color 0.5s;
+  transition: color 0.75s;
   :hover {
-    font-size: 24px;
     color: purple;
   }
   @media only screen and (min-width: 280px) and (max-width: 767px) {
@@ -144,6 +144,7 @@ export const BodyTextContainer = styled.div`
   padding: 20px 70px;
   color: lightgrey;
   font-size: 22px;
+  width: 100%;
   @media only screen and (min-width: 280px) and (max-width: 767px) {
     padding: 15px;
   }
@@ -153,6 +154,17 @@ export const BodyText = styled.div`
   font-size: 18px;
   color: white;
   padding: 10px 0;
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 250px;
+  background-image: url("/config/images/footerimage.png");
+  background-size: cover;
 `;
 
 function App() {
@@ -190,12 +202,12 @@ function App() {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    console.log(web3.eth.estimateGas);
     if (blockchain.balance < totalCostWei)
       setFeedback("Insufficient Balance in your wallet!");
     else
       setFeedback(`Minting your ${CONFIG.NFT_NAME}...Please give us a minute`);
     setClaimingNft(true);
+    console.log(blockchain.smartContract.methods);
     blockchain.smartContract.methods
       .mint(mintAmount)
       .send({
@@ -294,18 +306,20 @@ function App() {
           </a>
         </s.Container>
         <s.SpacerSmall />
-        <div id="fog-container">
-          <div id="foglayer_01" class="fog">
-            <div class="image01"></div>
-            <div class="image02"></div>
-          </div>
-          <div id="foglayer_02" class="fog">
-            <div class="image01"></div>
-            <div class="image02"></div>
-          </div>
-          <div id="foglayer_03" class="fog">
-            <div class="image01"></div>
-            <div class="image02"></div>
+        <div style={{ width: "100vw", maxWidth: "90vw", overflowX: "hidden" }}>
+          <div id="fog-container">
+            <div id="foglayer_01" class="fog">
+              <div class="image01"></div>
+              <div class="image02"></div>
+            </div>
+            <div id="foglayer_02" class="fog">
+              <div class="image01"></div>
+              <div class="image02"></div>
+            </div>
+            <div id="foglayer_03" class="fog">
+              <div class="image01"></div>
+              <div class="image02"></div>
+            </div>
           </div>
         </div>
         <div id="floating-skulls">
@@ -612,9 +626,7 @@ function App() {
           </BodyText>
         </BodyTextContainer>
         <s.SpacerLarge />
-        <s.Container
-          style={{ padding: "20px 70px", color: "lightgrey", fontSize: "22px" }}
-        >
+        <BodyTextContainer>
           <s.TextTitle
             id="about-ch"
             style={{ fontSize: "50px", color: "lightgrey" }}
@@ -622,13 +634,100 @@ function App() {
             About Cryptohouse
           </s.TextTitle>
           <p>
-            CryptoHouse is a bunch of punk ass bitches that have a Youtube show
-            about bitching about the government and sometimes crypto.
+            CryptoHouse is Crypto Jesus and Tracy. They have a live stream all
+            about crypto you can watch on the following platforms:
+            <ul
+              style={{
+                margin: "15px 10px 5px 10px",
+                paddingInlineStart: "40px",
+                listStyle: "square",
+              }}
+            >
+              <li>
+                <StyledLink
+                  src="https://youtube.com/c/CryptoJesus"
+                  target="_blank"
+                >
+                  Youtube
+                </StyledLink>
+              </li>
+              <li>
+                <StyledLink
+                  src="https://www.twitch.tv/crypt0house"
+                  target="_blank"
+                >
+                  Twitch
+                </StyledLink>
+              </li>
+              <li>
+                <StyledLink
+                  src="https://www.facebook.com/Crypt0House/videos/"
+                  target="_blank"
+                >
+                  Facebook
+                </StyledLink>
+              </li>
+              <li>
+                <StyledLink src="https://dlive.tv/CryptoHouse" target="_blank">
+                  DLive
+                </StyledLink>
+              </li>
+            </ul>
+            You can join them on the following social media outlets:
+            <ul
+              style={{
+                margin: "15px 10px 5px 10px",
+                paddingInlineStart: "40px",
+                listStyle: "square",
+              }}
+            >
+              <li>
+                <StyledLink
+                  src="https://www.facebook.com/Crypt0House"
+                  target="_blank"
+                >
+                  Facebook
+                </StyledLink>
+              </li>
+              <li>
+                <StyledLink
+                  src="https://twitter.com/cryptohouse19"
+                  target="_blank"
+                >
+                  Twitter
+                </StyledLink>
+              </li>
+              <li>
+                <StyledLink src="https://discord.gg/aecXF5pDRB" target="_blank">
+                  Discord
+                </StyledLink>
+              </li>
+            </ul>
           </p>
-          <p>Crypto Jesus - Punk</p>
-          <p>Tracy - Ass bitch</p>
-        </s.Container>
+        </BodyTextContainer>
       </s.Container>
+      <Footer>
+        <div style={{ color: "white", marginBottom: "20px" }}>
+          ©2021 Copyright CryptoHouse
+        </div>
+        <div
+          style={{ width: "100%", display: "flex", justifyContent: "center" }}
+        >
+          <StyledLink
+            style={{ marginRight: "20px" }}
+            src="https://docs.google.com/forms/d/1Q24NarEsigubhtSrjTrAd0eZohevDB8Ug79TezBStWs"
+            target="_blank"
+          >
+            Report a Bug or Problem
+          </StyledLink>
+          <StyledLink
+            src="https://docs.google.com/forms/d/1xUDuFQX1egISayYjqYUcXsM4R37cOxYo8uk6SZPeECA"
+            target="_blank"
+          >
+            Contact the Team
+          </StyledLink>
+        </div>
+      </Footer>
     </s.Screen>
   );
 }

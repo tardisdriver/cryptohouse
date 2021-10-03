@@ -1,7 +1,15 @@
+html,
+body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 #fog-container {
   background: #000;
   background: rgba(0, 0, 0, 1);
-  overflow-x: hidden;
+  overflow: hidden;
+  max-width: 80vw;
 }
 /* ---------- Fog ---------- */
 .fogwrapper {
@@ -9,8 +17,10 @@
   position: absolute;
   top: 0;
   width: 100%;
+  max-width: 80vw;
   -webkit-filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
   filter: blur(1px) grayscale(0.2) saturate(1.2) sepia(0.2);
+  overflow-x: hidden !important;
 }
 #foglayer_01,
 #foglayer_02,
