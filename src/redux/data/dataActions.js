@@ -33,7 +33,6 @@ export const fetchData = () => {
       //   .getState()
       //   .blockchain.smartContract.methods.cost()
       //   .call();
-
       dispatch(
         fetchDataSuccess({
           totalSupply,

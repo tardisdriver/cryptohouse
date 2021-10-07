@@ -11,6 +11,7 @@ const connectRequest = () => {
 };
 
 const connectSuccess = (payload) => {
+  console.log(payload);
   return {
     type: "CONNECTION_SUCCESS",
     payload: payload,
@@ -95,7 +96,11 @@ export const connect = () => {
           dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
         }
       } catch (err) {
-        dispatch(connectFailed("Something went wrong."));
+        dispatch(
+          connectFailed(
+            "Something went wrong connecting your wallet. Please refresh and try again. If that doesn't work, try disconnecting all of your wallets that are currently connected to this site and try again."
+          )
+        );
       }
     } else {
       dispatch(connectFailed("Install Metamask."));
@@ -104,7 +109,6 @@ export const connect = () => {
 };
 
 export const updateAccount = (account) => {
-  console.log(account);
   return async (dispatch) => {
     dispatch(updateAccountRequest({ account: account }));
     dispatch(fetchData(account));

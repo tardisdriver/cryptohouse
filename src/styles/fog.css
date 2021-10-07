@@ -28,7 +28,13 @@ body {
   height: 250px;
   position: absolute;
   width: 200%;
+  overflow: hidden;
+  max-width: 100vw;
 }
+
+/* #foglayer_01 {
+  max-width: 100vw;
+} */
 #foglayer_01 .image01,
 #foglayer_01 .image02,
 #foglayer_02 .image01,
@@ -66,14 +72,17 @@ body {
   */
 #foglayer_01 .image01,
 #foglayer_01 .image02 {
-  background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png")
+  background: url("https://www.dropbox.com/s/e8x1a95p7gwwxj9/fog1.png?raw=1")
     center center/cover no-repeat transparent;
+  /* background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png")
+    center center/cover no-repeat transparent; */
 }
 #foglayer_02 .image01,
 #foglayer_02 .image02,
 #foglayer_03 .image01,
 #foglayer_03 .image02 {
-  background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png")
+  background: url("https://www.dropbox.com/s/t7t3eul772p7y8d/fog2.png?raw=1")
+    /* background: url("https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog2.png") */
     center center/cover no-repeat transparent;
 }
 

@@ -5,10 +5,6 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import "./styles/fog.css";
-
-const truncate = (input, len) =>
-  input.length > len ? `${input.substring(0, len)}...` : input;
 
 export const StyledButton = styled.button`
   padding: 10px;
@@ -17,8 +13,10 @@ export const StyledButton = styled.button`
   background-color: purple;
   padding: 10px;
   font-weight: bold;
+  font-size: 26px;
   color: var(--secondary-text);
-  width: 150px;
+  width: 300px;
+  height: auto;
   cursor: pointer;
 
   :hover {
@@ -118,6 +116,8 @@ export const NavMenuItem = styled.li`
   font-size: 22px;
   cursor: pointer;
   transition: color 0.75s;
+  padding: 0 1rem;
+  text-align: center;
   :hover {
     color: purple;
   }
@@ -167,17 +167,25 @@ export const Footer = styled.div`
   background-size: cover;
 `;
 
+export const RoadMapItem = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  padding: 20px;
+  color: #642519;
+`;
+
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const [navOpen, setNavOpen] = useState(false);
+  const [buttonText, setButtonText] = useState("BUY");
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(
     `Choose your amount and click buy to mint your NFT.`
   );
   const [mintAmount, setMintAmount] = useState(1);
-  const [progressWidth, setProgressWidth] = useState(`0px`);
+  const [showProgress, setShowProgress] = useState(false);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -197,17 +205,51 @@ function App() {
     SHOW_BACKGROUND: false,
   });
 
-  const claimNFTs = () => {
-    let cost = CONFIG.WEI_COST;
+  const checkForSale = async () => {
+    console.log("click!");
+    setButtonText("Checking whitelist...");
+    let isWhitelisted = false;
+    let whiteListOnly = true;
+    let userCost = CONFIG.WEI_COST;
+    await blockchain.smartContract.methods
+      .isWhitelisted(blockchain.account)
+      .call()
+      .then((res) => (isWhitelisted = res))
+      .then(() => {
+        blockchain.smartContract.methods.setmaxMintAmount(1);
+      })
+      .then(() => {
+        setButtonText("Please Wait...");
+      });
+    if (isWhitelisted) {
+      userCost = 0;
+      if (mintAmount > 1) {
+        setMintAmount(1);
+        setFeedback("Sorry, only one NFT per whitelisted address.");
+      } else {
+        claimNFTs(userCost);
+      }
+    }
+    if (!whiteListOnly) {
+      claimNFTs(userCost);
+    } else {
+      if (!isWhitelisted)
+        setButtonText("Project is whitelist only at this time");
+      setTimeout(() => {
+        setButtonText("BUY");
+      }, 3000);
+    }
+  };
+
+  const claimNFTs = async (cost) => {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    if (blockchain.balance < totalCostWei)
-      setFeedback("Insufficient Balance in your wallet!");
-    else
-      setFeedback(`Minting your ${CONFIG.NFT_NAME}...Please give us a minute`);
+    setButtonText("Minting NFT...");
+    setFeedback(
+      `Minting your ${CONFIG.NFT_NAME}...Please be patient as this is dependent on current network traffic`
+    );
     setClaimingNft(true);
-    console.log(blockchain.smartContract.methods);
     blockchain.smartContract.methods
       .mint(mintAmount)
       .send({
@@ -222,13 +264,15 @@ function App() {
         setClaimingNft(false);
       })
       .then((receipt) => {
-        console.log(receipt);
         setFeedback(
           `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
         );
+        setButtonText("BUY");
         setClaimingNft(false);
-        calculateProgress();
         dispatch(fetchData(blockchain.account));
+      })
+      .catch(() => {
+        setButtonText("Try Again");
       });
   };
 
@@ -248,12 +292,6 @@ function App() {
     setMintAmount(newMintAmount);
   };
 
-  const calculateProgress = () => {
-    let progress = data.totalSupply / CONFIG.totalSupply;
-    let newProgressWidth = `${progress * 298}px`;
-    setProgressWidth(newProgressWidth);
-  };
-
   const getData = () => {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       dispatch(fetchData(blockchain.account));
@@ -261,7 +299,6 @@ function App() {
   };
 
   const getConfig = async () => {
-    console.log(progressWidth);
     const configResponse = await fetch("/config/config.json", {
       headers: {
         "Content-Type": "application/json",
@@ -271,6 +308,13 @@ function App() {
     const config = await configResponse.json();
     SET_CONFIG(config);
   };
+  useEffect(() => {
+    setShowProgress(true);
+  }, [data.totalSupply]);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   useEffect(() => {
     getConfig();
@@ -308,30 +352,35 @@ function App() {
         <s.SpacerSmall />
         <div style={{ width: "100vw", maxWidth: "90vw", overflowX: "hidden" }}>
           <div id="fog-container">
-            <div id="foglayer_01" class="fog">
-              <div class="image01"></div>
-              <div class="image02"></div>
+            <div id="foglayer_01" className="fog">
+              <div className="image01"></div>
+              <div className="image02"></div>
             </div>
-            <div id="foglayer_02" class="fog">
-              <div class="image01"></div>
-              <div class="image02"></div>
+            <div id="foglayer_02" className="fog">
+              <div className="image01"></div>
+              <div className="image02"></div>
             </div>
-            <div id="foglayer_03" class="fog">
-              <div class="image01"></div>
-              <div class="image02"></div>
+            <div id="foglayer_03" className="fog">
+              <div className="image01"></div>
+              <div className="image02"></div>
             </div>
           </div>
         </div>
         <div id="floating-skulls">
-          <img class="floating" height="80%" src="/config/images/1-1.png" />
-          <img class="floating" height="80%" src="/config/images/1-2.png" />
-          <img class="floating" height="80%" src="/config/images/1-3.png" />
-          <img class="floating" height="80%" src="/config/images/1-4.png" />
+          <img className="floating" height="80%" src="/config/images/1-1.png" />
+          <img className="floating" height="80%" src="/config/images/1-2.png" />
+          <img className="floating" height="80%" src="/config/images/1-3.png" />
+          <img className="floating" height="80%" src="/config/images/1-4.png" />
         </div>
         <NavMenu>
           <NavMenuItem>
             <Link to="about" spy={true} smooth={true}>
               About Lexiskulls
+            </Link>
+          </NavMenuItem>
+          <NavMenuItem>
+            <Link to="roadmap" spy={true} smooth={true}>
+              Roadmap
             </Link>
           </NavMenuItem>
           <NavMenuItem>
@@ -344,7 +393,13 @@ function App() {
               View On Opensea
             </ExternalLink>
           </NavMenuItem>
-          <li style={{ color: "#4c4c4c", fontSize: "22px" }}>
+          <li
+            style={{
+              color: "#4c4c4c",
+              fontSize: "22px",
+              textAlign: "center",
+            }}
+          >
             Enter the gRAVEyard (coming soon!)
           </li>
         </NavMenu>
@@ -430,14 +485,6 @@ function App() {
                   </s.Container>
                 ) : (
                   <>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "var(--accent-text)",
-                      }}
-                    >
-                      {feedback}
-                    </s.TextDescription>
                     <s.SpacerMedium />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledRoundButton
@@ -493,12 +540,27 @@ function App() {
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
-                          claimNFTs();
+                          checkForSale();
                           getData();
                         }}
                       >
-                        {claimingNft ? "Minting..." : "BUY"}
+                        {buttonText}
                       </StyledButton>
+                    </s.Container>
+                    <s.Container
+                      fd={"row"}
+                      jc={"center"}
+                      style={{ marginTop: "20px" }}
+                    >
+                      <s.TextDescription
+                        style={{
+                          textAlign: "center",
+                          color: "lightgreen",
+                          fontSize: "26px",
+                        }}
+                      >
+                        {feedback}
+                      </s.TextDescription>
                     </s.Container>
                   </>
                 )}
@@ -513,20 +575,11 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              Progress: {data.totalSupply} / {CONFIG.MAX_SUPPLY} Minted!
+              {showProgress && data.totalSupply > 0
+                ? `Progress: ${data.totalSupply} / ${CONFIG.MAX_SUPPLY} Minted!`
+                : "Fetching current sale progress...."}
             </s.TextSubTitle>
-            <s.SpacerXSmall />
-            <div
-              style={{
-                width: "300px",
-                height: "40px",
-                border: "1px solid white",
-                borderRadius: "3px",
-                overflow: "hidden",
-              }}
-            >
-              <img width={progressWidth} src={"/config/images/slime.gif"} />
-            </div>
+
             <s.SpacerMedium />
             <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
               <s.TextDescription
@@ -602,15 +655,20 @@ function App() {
           <BodyText>
             <h3 style={{ marginBottom: "5px" }}>Everyone Dies Equally</h3>
             <BodyText>
-              Lexiskulls will be fairly priced all at 25 MATIC. No tiers, no
-              curves, no weirdness. Just fair.
+              Lexiskulls will be fairly priced all at 16 MATIC. No tiers, no
+              curves, no weirdness. Just fair. Additionally, there is a cap of
+              10 Lexiskulls that may be minted per wallet, to give everyone a
+              chance to get in.
             </BodyText>
             <BodyText>
-              100 Lexiskulls will be reserved for team, giveaways, and contests.
-              The most rare of the rare, a 100% ultra-rare skull, will be given
-              as a prize in a competition launching soon. In order to get access
-              to the hunt, you'll need a skull in your wallet to gain access to
-              The gRAVEyard. What is The gRAVEyard you ask?
+              Several giveaways are planned to launch the project, totaling to
+              106 free NFTs to the community (includes 6 reserved for the Crypto
+              House team), with additional giveaways at random (see roadmap
+              below for more details). The most rare of the rare, a 100%
+              ultra-rare skull, will be given as a prize in a competition
+              launching on October 31st. In order to get access to the hunt,
+              you'll need a skull in your wallet to gain access to The
+              gRAVEyard. What is The gRAVEyard you ask?
             </BodyText>
           </BodyText>
           <BodyText>
@@ -627,18 +685,75 @@ function App() {
         </BodyTextContainer>
         <s.SpacerLarge />
         <BodyTextContainer>
+          <BodyText>
+            <s.TextTitle
+              id="roadmap"
+              style={{ fontSize: "50px", color: "lightgrey" }}
+            >
+              Roadmap
+            </s.TextTitle>
+            <s.TextSubTitle>
+              Disclaimer: Dates are approximate. We are a VERY small team right
+              now, with day jobs and a{" "}
+              <StyledLink
+                href="https://youtube.com/c/CryptoJesus"
+                target="_blank"
+              >
+                YouTube show
+              </StyledLink>
+              . Please bear with us and we will hit deadlines as close as
+              possible.
+            </s.TextSubTitle>
+            <div
+              style={{
+                backgroundImage: "url('/config/images/roadmap.png')",
+                height: "auto",
+                padding: "40px 90px",
+                marginTop: "15px",
+                borderRadius: "4px",
+              }}
+            >
+              <RoadMapItem>
+                <img src="/config/images/X.png" />
+                October 9th-21st Giveaways!
+              </RoadMapItem>
+              <RoadMapItem>
+                October 22nd - Official Launch / Open Sale
+                <img src="/config/images/X.png" />
+              </RoadMapItem>
+              <RoadMapItem>
+                <img src="/config/images/X.png" />
+                October 31st - gRAVEyard opens AND Treasure Hunt competition for
+                ultra rare "Golden" Lexiskull begins
+              </RoadMapItem>
+              <RoadMapItem>
+                November 5th - 1st gRAVEyard member perk arrives (it's a
+                surprise!)
+                <img src="/config/images/X.png" />
+              </RoadMapItem>
+              <RoadMapItem>
+                <img src="/config/images/X.png" />
+                November 30th - 2nd gRAVEyard perk... SwearySkulls opens for
+                Lexiskull holders only!
+              </RoadMapItem>
+            </div>
+          </BodyText>
+        </BodyTextContainer>
+        <s.SpacerLarge />
+        <BodyTextContainer>
+          <img src="/config/images/Cryptologo.png" />
           <s.TextTitle
             id="about-ch"
             style={{ fontSize: "50px", color: "lightgrey" }}
           >
-            About Cryptohouse
+            About Crypto House
           </s.TextTitle>
-          <p>
-            CryptoHouse is Crypto Jesus and Tracy. They have a live stream all
+          <div>
+            Crypto House is Crypto Jesus and Tracy. They have a live stream all
             about crypto you can watch on the following platforms:
             <ul
               style={{
-                margin: "15px 10px 5px 10px",
+                margin: "15px 10px",
                 paddingInlineStart: "40px",
                 listStyle: "square",
               }}
@@ -676,7 +791,7 @@ function App() {
             You can join them on the following social media outlets:
             <ul
               style={{
-                margin: "15px 10px 5px 10px",
+                margin: "15px 10px",
                 paddingInlineStart: "40px",
                 listStyle: "square",
               }}
@@ -703,7 +818,7 @@ function App() {
                 </StyledLink>
               </li>
             </ul>
-          </p>
+          </div>
         </BodyTextContainer>
       </s.Container>
       <Footer>

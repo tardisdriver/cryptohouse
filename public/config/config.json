@@ -1,16 +1,16 @@
 {
-  "CONTRACT_ADDRESS": "0x42864FfD8C36bC60a7e9E92af94c8A69726e47A1",
-  "SCAN_LINK": "https://mumbai.polygonscan.com/address/0x42864ffd8c36bc60a7e9e92af94c8a69726e47a1#code",
+  "CONTRACT_ADDRESS": "0x329f367cbfb8b8f769b9bef01c0270981254f2bb",
+  "SCAN_LINK": "https://ropsten.etherscan.io/address/0x329f367cbfb8b8f769b9bef01c0270981254f2bb",
   "NETWORK": {
-    "NAME": "Polygon Mumbai",
-    "SYMBOL": "MATIC",
-    "ID": 80001
+    "NAME": "Ropsten",
+    "SYMBOL": "ETH",
+    "ID": 3
   },
-  "NFT_NAME": "Lexiskull",
+  "NFT_NAME": "Lexiskulls",
   "SYMBOL": "LEXISKULL",
   "MAX_SUPPLY": 10001,
-  "WEI_COST": 25000000000000000000,
-  "DISPLAY_COST": 25,
+  "WEI_COST": 750000000000000,
+  "DISPLAY_COST": 0.00075,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opensea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/nerdy-coder-clones",
