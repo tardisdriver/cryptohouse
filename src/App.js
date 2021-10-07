@@ -389,7 +389,7 @@ function App() {
             </Link>
           </NavMenuItem>
           <NavMenuItem>
-            <ExternalLink href="https://google.com" target="_blank">
+            <ExternalLink href={CONFIG.MARKETPLACE_LINK} target="_blank">
               View On Opensea
             </ExternalLink>
           </NavMenuItem>
