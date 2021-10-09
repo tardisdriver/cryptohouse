@@ -175,6 +175,19 @@ export const RoadMapItem = styled.div`
   color: #642519;
 `;
 
+export const GiveawayButton = styled.a`
+  padding: 10px 15px;
+  color: white;
+  background-color: #07ad31;
+  border-radius: 4px;
+  margin-right: auto;
+  margin-left: auto;
+  text-decoration: none;
+  font-size: 26px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+`;
+
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -403,6 +416,21 @@ function App() {
             Enter the gRAVEyard (coming soon!)
           </li>
         </NavMenu>
+        <s.Container>
+          <GiveawayButton
+            class="e-widget no-button"
+            href="https://gleam.io/Slk0P/lexiskulls-free-nft-giveaway-1"
+            rel="nofollow"
+            target="_blank"
+          >
+            Click Here For Lexiskulls Free NFT Giveaway #1!
+          </GiveawayButton>
+          {/* <script
+            type="text/javascript"
+            src="https://widget.gleamjs.io/e.js"
+            async="true"
+          ></script> */}
+        </s.Container>
         <ResponsiveWrapper flex={1} test>
           <s.SpacerLarge />
           <s.Container
