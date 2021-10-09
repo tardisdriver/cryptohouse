@@ -358,8 +358,15 @@ function App() {
           >
             <img src="/config/images/logo-twitter.png" />
           </a>
-          <a href="https://discord.gg/yb6ycJBw3y" target="_blank">
+          <a
+            href="https://discord.gg/yb6ycJBw3y"
+            target="_blank"
+            style={{ paddingRight: "40px" }}
+          >
             <img src="/config/images/discord-icon.png" />
+          </a>
+          <a href="https://t.me/lexiskulls" target="_blank">
+            <img src="/config/images/tg.png" />
           </a>
         </s.Container>
         <s.SpacerSmall />
