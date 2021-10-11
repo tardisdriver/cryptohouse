@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "../redux/blockchain/blockchainActions";
@@ -385,7 +385,7 @@ export default function Main() {
                       getData();
                     }}
                   >
-                    CONNECT WALLET
+                    CONNECT METAMASK
                   </StyledButton>
                   {blockchain.errorMsg !== "" ? (
                     <>
@@ -656,6 +656,86 @@ export default function Main() {
         </BodyText>
       </BodyTextContainer>
       <s.SpacerLarge />
+      <BodyTextContainer>
+        <img src="/config/images/Cryptologo.png" />
+        <s.TextTitle
+          id="about-ch"
+          style={{ fontSize: "50px", color: "lightgrey" }}
+        >
+          About Crypto House
+        </s.TextTitle>
+        <div>
+          Crypto House is Crypto Jesus and Tracy. They have a live stream all
+          about crypto you can watch on the following platforms:
+          <ul
+            style={{
+              margin: "15px 10px",
+              paddingInlineStart: "40px",
+              listStyle: "square",
+            }}
+          >
+            <li>
+              <StyledLink
+                src="https://youtube.com/c/CryptoJesus"
+                target="_blank"
+              >
+                Youtube
+              </StyledLink>
+            </li>
+            <li>
+              <StyledLink
+                src="https://www.twitch.tv/crypt0house"
+                target="_blank"
+              >
+                Twitch
+              </StyledLink>
+            </li>
+            <li>
+              <StyledLink
+                src="https://www.facebook.com/Crypt0House/videos/"
+                target="_blank"
+              >
+                Facebook
+              </StyledLink>
+            </li>
+            <li>
+              <StyledLink src="https://dlive.tv/CryptoHouse" target="_blank">
+                DLive
+              </StyledLink>
+            </li>
+          </ul>
+          You can join them on the following social media outlets:
+          <ul
+            style={{
+              margin: "15px 10px",
+              paddingInlineStart: "40px",
+              listStyle: "square",
+            }}
+          >
+            <li>
+              <StyledLink
+                src="https://www.facebook.com/Crypt0House"
+                target="_blank"
+              >
+                Facebook
+              </StyledLink>
+            </li>
+            <li>
+              <StyledLink
+                src="https://twitter.com/cryptohouse19"
+                target="_blank"
+              >
+                Twitter
+              </StyledLink>
+            </li>
+            <li>
+              <StyledLink src="https://discord.gg/aecXF5pDRB" target="_blank">
+                Discord
+              </StyledLink>
+            </li>
+          </ul>
+        </div>
+      </BodyTextContainer>
     </div>
   );
 }

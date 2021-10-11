@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-scroll";
+// import { Link } from "react-scroll";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 
 import Main from "../src/components/main";
+import Graveyard from "../src/components/graveyard";
 
 export const StyledLogo = styled.img`
   width: 350px;
@@ -152,99 +153,20 @@ function App() {
           <img className="floating" height="80%" src="/config/images/1-4.png" />
         </div>
         <s.Container>
-          <GiveawayButton
+          {/* <GiveawayButton
             className="e-widget no-button"
             href="https://gleam.io/Slk0P/lexiskulls-free-nft-giveaway-1"
             rel="nofollow"
             target="_blank"
           >
             Click Here For Lexiskulls Free NFT Giveaway #1!
-          </GiveawayButton>
+          </GiveawayButton> */}
         </s.Container>
         <Router>
-          <Route path="/" render={() => <Main />} />
+          <Route path="/" exact component={Main} />
+          <Route path="/graveyard" component={Graveyard} />
         </Router>
         <s.SpacerXSmall />
-        <BodyTextContainer>
-          <img src="/config/images/Cryptologo.png" />
-          <s.TextTitle
-            id="about-ch"
-            style={{ fontSize: "50px", color: "lightgrey" }}
-          >
-            About Crypto House
-          </s.TextTitle>
-          <div>
-            Crypto House is Crypto Jesus and Tracy. They have a live stream all
-            about crypto you can watch on the following platforms:
-            <ul
-              style={{
-                margin: "15px 10px",
-                paddingInlineStart: "40px",
-                listStyle: "square",
-              }}
-            >
-              <li>
-                <StyledLink
-                  src="https://youtube.com/c/CryptoJesus"
-                  target="_blank"
-                >
-                  Youtube
-                </StyledLink>
-              </li>
-              <li>
-                <StyledLink
-                  src="https://www.twitch.tv/crypt0house"
-                  target="_blank"
-                >
-                  Twitch
-                </StyledLink>
-              </li>
-              <li>
-                <StyledLink
-                  src="https://www.facebook.com/Crypt0House/videos/"
-                  target="_blank"
-                >
-                  Facebook
-                </StyledLink>
-              </li>
-              <li>
-                <StyledLink src="https://dlive.tv/CryptoHouse" target="_blank">
-                  DLive
-                </StyledLink>
-              </li>
-            </ul>
-            You can join them on the following social media outlets:
-            <ul
-              style={{
-                margin: "15px 10px",
-                paddingInlineStart: "40px",
-                listStyle: "square",
-              }}
-            >
-              <li>
-                <StyledLink
-                  src="https://www.facebook.com/Crypt0House"
-                  target="_blank"
-                >
-                  Facebook
-                </StyledLink>
-              </li>
-              <li>
-                <StyledLink
-                  src="https://twitter.com/cryptohouse19"
-                  target="_blank"
-                >
-                  Twitter
-                </StyledLink>
-              </li>
-              <li>
-                <StyledLink src="https://discord.gg/aecXF5pDRB" target="_blank">
-                  Discord
-                </StyledLink>
-              </li>
-            </ul>
-          </div>
-        </BodyTextContainer>
       </s.Container>
       <Footer>
         <div style={{ color: "white", marginBottom: "20px" }}>
