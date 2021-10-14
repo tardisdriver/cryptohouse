@@ -5,7 +5,7 @@ import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 
 import Main from "../src/components/main";
-import Graveyard from "../src/components/graveyard";
+// import Graveyard from "../src/components/graveyard";
 
 export const StyledLogo = styled.img`
   width: 350px;
@@ -164,7 +164,7 @@ function App() {
         </s.Container>
         <Router>
           <Route path="/" exact component={Main} />
-          <Route path="/graveyard" component={Graveyard} />
+          {/* <Route path="/graveyard" component={Graveyard} /> */}
         </Router>
         <s.SpacerXSmall />
       </s.Container>

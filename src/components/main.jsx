@@ -525,7 +525,36 @@ export default function Main() {
         </s.Container>
         <s.SpacerLarge />
       </ResponsiveWrapper>
-
+      <BodyTextContainer>
+        <s.TextTitle style={{ fontSize: "50px", color: "lightgrey" }}>
+          As Seen On:
+        </s.TextTitle>
+        <BodyText
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <a href="https://nftcalendar.io/event/lexiskulls/" target="_blank">
+            <img
+              src="/config/images/nftcalendar.png"
+              width="70%"
+              alt="NFTCalendar.io"
+            />
+          </a>
+          <a
+            href="https://cryptofoxtrot.com/upcoming-nft-collections/public-sale/lexiskulls/"
+            target="_blank"
+          >
+            <img
+              src="/config/images/cryptofoxtrot-logo.png"
+              width="70%"
+              alt="CryptoFoxtrot"
+            />
+          </a>
+        </BodyText>
+      </BodyTextContainer>
       <BodyTextContainer>
         <s.TextTitle
           id="about"
