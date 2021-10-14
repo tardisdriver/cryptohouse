@@ -33,6 +33,7 @@ const updateAccountRequest = (payload) => {
 };
 
 export const connect = () => {
+  console.log("connect");
   return async (dispatch) => {
     dispatch(connectRequest());
     const abiResponse = await fetch("/config/abi.json", {
