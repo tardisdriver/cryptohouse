@@ -174,7 +174,7 @@ export default function Main() {
     console.log("click!");
     setButtonText("Checking whitelist...");
     let isWhitelisted = false;
-    let whiteListOnly = true;
+    let whiteListOnly = false;
     let userCost = CONFIG.WEI_COST;
     await blockchain.smartContract.methods
       .isWhitelisted(blockchain.account)
