@@ -195,15 +195,15 @@ export default function Main() {
         claimNFTs(userCost);
       }
     }
-    if (!whiteListOnly) {
-      claimNFTs(userCost);
-    } else {
-      if (!isWhitelisted)
-        setButtonText("Project is whitelist only at this time");
-      setTimeout(() => {
-        setButtonText("BUY");
-      }, 3000);
-    }
+    // if (!whiteListOnly) {
+    //   claimNFTs(userCost);
+    // } else {
+    //   if (!isWhitelisted)
+    //     setButtonText("Project is whitelist only at this time");
+    //   setTimeout(() => {
+    //     setButtonText("BUY");
+    //   }, 3000);
+    // }
   };
 
   const claimNFTs = async (cost) => {
