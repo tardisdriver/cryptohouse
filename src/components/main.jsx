@@ -302,11 +302,6 @@ export default function Main() {
           </Link>
         </NavMenuItem>
         <NavMenuItem>
-          <Link to="about-ch" spy={true} smooth={true}>
-            About CryptoHouse
-          </Link>
-        </NavMenuItem>
-        <NavMenuItem>
           <ExternalLink href={CONFIG.MARKETPLACE_LINK} target="_blank">
             View On Opensea
           </ExternalLink>
@@ -318,7 +313,7 @@ export default function Main() {
             textAlign: "center",
           }}
         >
-          Enter the gRAVEyard (coming soon!)
+          Enter the gRAVEyard (opens at 5000 mints!)
         </li>
       </NavMenu>
       <ResponsiveWrapper flex={1} test>
@@ -606,14 +601,10 @@ export default function Main() {
             to get in.
           </BodyText>
           <BodyText>
-            Several giveaways are planned to launch the project, totaling to 106
-            free NFTs to the community (includes 6 reserved for the Crypto House
-            team), with additional giveaways at random (see roadmap below for
-            more details). The most rare of the rare, a 100% ultra-rare skull,
-            will be given as a prize in a competition launching on October 31st.
-            In order to get access to the hunt, you'll need a skull in your
-            wallet to gain access to The gRAVEyard. What is The gRAVEyard you
-            ask?
+            On the 5000th mint, The gRAVEyard opens, which in turns triggers the
+            start of the Golden Lexiskull Treasure Hunt. In order to get access
+            to the hunt, you'll need a skull in your wallet to gain access to
+            The gRAVEyard. What is The gRAVEyard you ask?
           </BodyText>
         </BodyText>
         <BodyText>
@@ -638,16 +629,8 @@ export default function Main() {
             Roadmap
           </s.TextTitle>
           <s.TextSubTitle>
-            Disclaimer: Dates are approximate. We are a VERY small team right
-            now, with day jobs and a{" "}
-            <StyledLink
-              href="https://youtube.com/c/CryptoJesus"
-              target="_blank"
-            >
-              YouTube show
-            </StyledLink>
-            . Please bear with us and we will hit deadlines as close as
-            possible.
+            Disclaimer: Dates are approximate. We are a VERY small team. Please
+            bear with us and we will hit deadlines as close as possible.
           </s.TextSubTitle>
           <div
             style={{
@@ -660,111 +643,34 @@ export default function Main() {
           >
             <RoadMapItem>
               <img src="/config/images/X.png" />
-              October 9th-21st Giveaways!
+              <span style={{ textDecoration: "line-through" }}>
+                October 9th-21st Giveaways!
+              </span>
             </RoadMapItem>
             <RoadMapItem>
-              October 22nd - Official Launch / Open Sale
+              <span style={{ textDecoration: "line-through" }}>
+                October 22nd - Official Launch / Open Sale
+              </span>
               <img src="/config/images/X.png" />
             </RoadMapItem>
             <RoadMapItem>
               <img src="/config/images/X.png" />
-              October 31st - gRAVEyard opens AND Treasure Hunt competition for
-              ultra rare "Golden" Lexiskull begins
+              TBD - 5000th Mint - The gRAVEyard opens; Golden Skull Treasure
+              Hunt Begins!
             </RoadMapItem>
             <RoadMapItem>
-              November 5th - 1st gRAVEyard member perk arrives (it's a
-              surprise!)
+              November 20th (date approximate) - Lexiskull Holders-only swag
+              store opens!
               <img src="/config/images/X.png" />
             </RoadMapItem>
             <RoadMapItem>
               <img src="/config/images/X.png" />
-              November 30th - 2nd gRAVEyard perk... SwearySkulls opens for
-              Lexiskull holders only!
+              Additional roadmap items coming soon!
             </RoadMapItem>
           </div>
         </BodyText>
       </BodyTextContainer>
       <s.SpacerLarge />
-      <BodyTextContainer>
-        <img src="/config/images/Cryptologo.png" />
-        <s.TextTitle
-          id="about-ch"
-          style={{ fontSize: "50px", color: "lightgrey" }}
-        >
-          About Crypto House
-        </s.TextTitle>
-        <div>
-          Crypto House is Crypto Jesus and Tracy. They have a live stream all
-          about crypto you can watch on the following platforms:
-          <ul
-            style={{
-              margin: "15px 10px",
-              paddingInlineStart: "40px",
-              listStyle: "square",
-            }}
-          >
-            <li>
-              <StyledLink
-                src="https://youtube.com/c/CryptoJesus"
-                target="_blank"
-              >
-                Youtube
-              </StyledLink>
-            </li>
-            <li>
-              <StyledLink
-                src="https://www.twitch.tv/crypt0house"
-                target="_blank"
-              >
-                Twitch
-              </StyledLink>
-            </li>
-            <li>
-              <StyledLink
-                src="https://www.facebook.com/Crypt0House/videos/"
-                target="_blank"
-              >
-                Facebook
-              </StyledLink>
-            </li>
-            <li>
-              <StyledLink src="https://dlive.tv/CryptoHouse" target="_blank">
-                DLive
-              </StyledLink>
-            </li>
-          </ul>
-          You can join them on the following social media outlets:
-          <ul
-            style={{
-              margin: "15px 10px",
-              paddingInlineStart: "40px",
-              listStyle: "square",
-            }}
-          >
-            <li>
-              <StyledLink
-                src="https://www.facebook.com/Crypt0House"
-                target="_blank"
-              >
-                Facebook
-              </StyledLink>
-            </li>
-            <li>
-              <StyledLink
-                src="https://twitter.com/cryptohouse19"
-                target="_blank"
-              >
-                Twitter
-              </StyledLink>
-            </li>
-            <li>
-              <StyledLink src="https://discord.gg/aecXF5pDRB" target="_blank">
-                Discord
-              </StyledLink>
-            </li>
-          </ul>
-        </div>
-      </BodyTextContainer>
     </div>
   );
 }
