@@ -1,4 +1,4 @@
-# fuck
+
 
 ## Project setup
 ```
